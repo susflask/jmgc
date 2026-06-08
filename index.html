@@ -40,20 +40,12 @@ body.mopen{overflow:hidden}
 
 /* ── 고정 배경 ── */
 #rain{position:fixed;inset:0;z-index:1;pointer-events:none}
-.grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.4}
-.grid line,.grid circle{stroke:rgba(217,178,95,.05);fill:none;stroke-width:.5}
 .scan{position:fixed;inset:0;z-index:3;pointer-events:none;opacity:.5;
   background:repeating-linear-gradient(0deg, transparent 0 2px, rgba(0,0,0,.15) 2px 3px)}
 .grain{position:fixed;inset:-50%;z-index:3;pointer-events:none;opacity:.06;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .vign{position:fixed;inset:0;z-index:4;pointer-events:none;
   background:radial-gradient(120% 95% at 50% 36%, transparent 46%, rgba(1,2,6,.64) 80%, rgba(0,0,1,.95) 100%)}
-.ui span{position:fixed;width:24px;height:24px;z-index:5;pointer-events:none;border:1.4px solid rgba(217,178,95,.4);transition:opacity .4s ease}
-.ui .tl{top:calc(14px + env(safe-area-inset-top));left:14px;border-right:0;border-bottom:0}
-.ui .tr{top:calc(14px + env(safe-area-inset-top));right:14px;border-left:0;border-bottom:0}
-.ui .bl{bottom:calc(14px + env(safe-area-inset-bottom));left:14px;border-right:0;border-top:0}
-.ui .br{bottom:calc(14px + env(safe-area-inset-bottom));right:14px;border-left:0;border-top:0}
-body.mopen .ui span{opacity:0}
 
 /* ════════ 메인 (로고+이름 위, 이미지 아래) ════════ */
 #stage{position:relative;z-index:6;height:100dvh;display:flex;flex-direction:column;
@@ -145,19 +137,12 @@ body.mopen #stage{opacity:0;pointer-events:none;transition:opacity .45s ease}
 @keyframes lock{0%{opacity:0;transform:translate(-50%,-50%) scale(.55)}18%{opacity:.9}100%{opacity:0;transform:translate(-50%,-50%) scale(1.5)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 .spin-slow{transform-origin:150px 150px;animation:spin 80s linear infinite}
-
-@media (prefers-reduced-motion: reduce){*{animation:none !important;transition-duration:.01ms !important}}
 </style>
 </head>
 <body>
 
 <canvas id="rain"></canvas>
-<svg class="grid" preserveAspectRatio="xMidYMid slice" viewBox="0 0 100 100" aria-hidden="true">
-  <circle cx="50" cy="30" r="16"/><circle cx="50" cy="30" r="30"/><circle cx="50" cy="30" r="46"/>
-  <line x1="50" y1="0" x2="50" y2="100"/><line x1="0" y1="30" x2="100" y2="30"/>
-</svg>
 <div class="scan"></div><div class="grain"></div><div class="vign"></div>
-<div class="ui"><span class="tl"></span><span class="tr"></span><span class="bl"></span><span class="br"></span></div>
 
 <!-- 메인 -->
 <main id="stage">
@@ -202,7 +187,7 @@ body.mopen #stage{opacity:0;pointer-events:none;transition:opacity .45s ease}
      ═══════════════════════════════════════════════ */
   var NOTICE_IMAGE_URL = "https://res.cloudinary.com/dqyfhmygt/image/upload/f_auto,q_auto,c_fill,ar_1:1,w_1080/jmgc_notice";
 
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduce = false; // 모션 효과 항상 ON (reduce-motion 무시)
 
   /* ── 엠블럼 벡터(로고 폴백) ── */
   function buildEmblem(sfx){

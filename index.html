@@ -221,16 +221,15 @@ body.mopen #stage{opacity:0;pointer-events:none;transition:opacity .45s ease}
   document.getElementById('emblemBig').innerHTML = buildEmblem('a');
   document.getElementById('emblemTop').innerHTML = buildEmblem('b');
 
-  var supportsWebp=false;
-  try{ supportsWebp = document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp')===0; }catch(e){}
-  var logoSrc = supportsWebp ? 'logo.webp' : 'logo.png';   // WebP 미지원 폰은 PNG로 (모든 기기에서 실제 로고 표시)
+  /* 로고 = 투명 PNG 하나로 통일 (모든 기기 100% 호환, WebP 미사용) */
+  var LOGO='logo.png?v=2';
   var probe=new Image();
   probe.onload=function(){
-    var html='<img src="'+logoSrc+'" alt="JMGC" style="filter:drop-shadow(0 0 18px rgba(217,178,95,.26))">';
+    var html='<img src="'+LOGO+'" alt="JMGC" style="filter:drop-shadow(0 0 18px rgba(217,178,95,.26))">';
     document.getElementById('emblemBig').innerHTML=html;
     document.getElementById('emblemTop').innerHTML=html;
   };
-  probe.src=logoSrc;
+  probe.src=LOGO;
 
   /* ── 공지 이미지: 클라우드 URL 우선, 없으면 로컬, 둘 다 없으면 숨김 ── */
   var notice=document.getElementById('notice');

@@ -89,12 +89,22 @@ body.mopen #stage{opacity:0;pointer-events:none;transition:opacity .45s ease}
 .namebtn:hover .wordmark,.namebtn:focus-visible .wordmark{filter:drop-shadow(0 0 18px rgba(231,200,132,.5))}
 .namebtn:active{transform:scale(.98)}
 
-.gallery{flex:1 1 auto;min-height:0;width:100%;display:flex;align-items:flex-start;justify-content:center;
+.gallery{flex:1 1 auto;min-height:0;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
   padding-top:clamp(30px,5.5vh,52px)}
 .gallery img{width:min(92vw,62vh,560px);aspect-ratio:1/1;object-fit:cover;display:block;border-radius:10px;
   opacity:0;transform:translateY(16px);transition:opacity 1s ease,transform 1s ease;
   filter:drop-shadow(0 18px 46px rgba(0,0,0,.55))}
 .gallery img.in{opacity:1;transform:none}
+.contact-btn{margin-top:clamp(16px,3vh,28px);display:inline-flex;align-items:center;gap:8px;
+  padding:10px 24px;border-radius:999px;text-decoration:none;-webkit-tap-highlight-color:transparent;
+  font-family:"Noto Serif KR",serif;font-weight:400;font-size:clamp(12.5px,3.5vw,14.5px);letter-spacing:.08em;
+  color:var(--gold-br);border:1px solid rgba(217,178,95,.42);background:rgba(217,178,95,.05);
+  opacity:0;transform:translateY(12px);
+  transition:opacity .9s ease,transform .9s ease,background .25s ease,border-color .25s ease}
+#stage.show .contact-btn{opacity:1;transform:none;transition-delay:1.15s,1.15s,0s,0s}
+.contact-btn::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 7px rgba(217,178,95,.55)}
+.contact-btn:hover{background:rgba(217,178,95,.13);border-color:rgba(217,178,95,.75);transform:translateY(-1px)}
+.contact-btn:active{transform:scale(.98)}
 
 /* ════════ 매니페스토 오버레이 + 뒤로가기 ════════ */
 .back{position:fixed;top:calc(18px + env(safe-area-inset-top));left:18px;z-index:16;
@@ -167,7 +177,10 @@ body.mopen #stage{opacity:0;pointer-events:none;transition:opacity .45s ease}
       <span class="wordmark">좋은 마음씨 가지기 클럽</span>
     </button>
   </header>
-  <section class="gallery"><img id="notice" alt=""></section>
+  <section class="gallery">
+    <img id="notice" alt="">
+    <a class="contact-btn" href="https://open.kakao.com/o/s68KZezi" target="_blank" rel="noopener noreferrer">문의하기</a>
+  </section>
 </main>
 
 <!-- 매니페스토 (이름 누르면) -->
